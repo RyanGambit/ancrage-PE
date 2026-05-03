@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ancrage · An AI-native private equity firm</title>
+<meta name="description" content="Ancrage takes control positions in mid-market companies at the intersection of AI, physical industry, and regulated markets. Toronto · Detroit · Hong Kong." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============== TOKENS ============== */
+  :root {
+    --ink: #0A1628;
+    --ink-deep: #050D18;
+    --ink-soft: #1A2B3F;
+    --tide: #1E4D4A;
+    --tide-bright: #2C7873;
+    --tide-pale: #B8CFC9;
+    --copper: #B8845F;
+    --copper-deep: #8B5E3C;
+    --paper: #F4ECDD;
+    --paper-deep: #E8DCC0;
+    --bone: #FAF6EE;
+    --slate: #4A5568;
+    --slate-light: #8B9099;
+    --line: rgba(10, 22, 40, 0.12);
+    --line-strong: rgba(10, 22, 40, 0.28);
+
+    --display: 'Fraunces', 'Times New Roman', serif;
+    --body: 'Newsreader', Georgia, serif;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Paper grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.15  0 0 0 0 0.05  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ============== TYPE ============== */
+  .display { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; }
+  .mono { font-family: var(--mono); font-weight: 400; }
+  .micro { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400; }
+
+  h1, h2, h3, h4 { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; line-height: 1.05; }
+
+  p { font-family: var(--body); }
+
+  ::selection { background: var(--tide); color: var(--paper); }
+
+  /* ============== NAV ============== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(244, 236, 221, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    transition: padding 0.3s ease, background 0.3s ease;
+  }
+
+  nav .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  nav .brand-mark {
+    width: 28px; height: 28px;
+  }
+
+  nav .brand-name {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+
+  nav .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  nav .nav-links a:hover { color: var(--ink); }
+
+  nav .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 1px;
+    background: var(--tide);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  nav .nav-links a:hover::after { transform: scaleX(1); }
+
+  nav .nav-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 10px 18px;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: all 0.2s ease;
+  }
+
+  nav .nav-cta:hover {
+    background: var(--tide);
+    border-color: var(--tide);
+  }
+
+  /* ============== LAYOUT ============== */
+  section { position: relative; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .container-narrow {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .section-label .roman {
+    color: var(--copper);
+    font-weight: 500;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    height: 1px;
+    background: var(--line-strong);
+    flex: 0 0 60px;
+  }
+
+  .section-label::after { flex: 1; }
+
+  /* ============== HERO ============== */
+  #hero {
+    min-height: 100vh;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    padding: 120px 0 80px;
+    display: flex;
+    align-items: center;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(46, 120, 115, 0.18), transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(184, 132, 95, 0.10), transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Bathymetric contour lines as hero backdrop */
+  .hero-bathymetry {
+    position: absolute;
+    right: -10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70%;
+    height: 90%;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--tide-pale);
+  }
+
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px;
+    background: var(--copper);
+    border-radius: 50%;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1.hero-title {
+    font-size: clamp(56px, 9vw, 132px);
+    line-height: 0.95;
+    font-weight: 300;
+    margin-bottom: 36px;
+    letter-spacing: -0.035em;
+  }
+
+  h1.hero-title .italic {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--copper);
+  }
+
+  .hero-lede {
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.5;
+    max-width: 640px;
+    color: var(--tide-pale);
+    font-weight: 300;
+    margin-bottom: 64px;
+  }
+
+  .hero-lede em {
+    font-style: italic;
+    color: var(--paper);
+  }
+
+  .hero-coords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(244, 236, 221, 0.15);
+  }
+
+  .hero-coord {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-coord .city {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--tide-pale);
+  }
+
+  .hero-coord .lat {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--paper);
+    font-weight: 300;
+  }
+
+  /* Compass rose */
+  .compass-rose {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    width: 320px;
+    height: 320px;
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  /* ============== THESIS ============== */
+  #thesis {
+    padding: 140px 0;
+    background: var(--paper);
+    position: relative;
+  }
+
+  .thesis-headline {
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1.05;
+    font-weight: 300;
+    max-width: 1100px;
+    margin-bottom: 80px;
+  }
+
+  .thesis-headline em {
+    font-style: italic;
+    color: var(--tide);
+    font-weight: 300;
+  }
+
+  .thesis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .thesis-card {
+    padding: 48px 36px 48px 0;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+
+  .thesis-card:last-child { border-right: none; padding-right: 0; }
+  .thesis-card:not(:first-child) { padding-left: 36px; }
+
+  .thesis-card .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--copper);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .thesis-card h3 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .thesis-card h3 em {
+    font-style: italic;
+    color: var(--tide);
+  }
+
+  .thesis-card p {
+    color: var(--slate);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ============== TAGLINE ============== */
+  #tagline {
+    padding: 160px 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #tagline::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(transparent 0%, transparent 95%, rgba(244, 236, 221, 0.04) 95%),
+      linear-gradient(90deg, transparent 0%, transparent 95%, rgba(244, 236, 221, 0.04) 95%);
+    background-size: 60px 60px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .tagline-quote {
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1.05;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 56px;
+    letter-spacing: -0.025em;
+  }
+
+  .tagline-quote em {
+    font-style: italic;
+    color: var(--copper);
+  }
+
+  .tagline-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--copper);
+    margin: 0 auto 56px;
+  }
+
+  .tagline-body {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--tide-pale);
+    font-weight: 300;
+  }
+
+  /* ============== MANDATE ============== */
+  #mandate {
+    padding: 140px 0;
+    background: var(--paper);
+  }
+
+  .mandate-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .mandate-left h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .mandate-left h2 em {
+    font-style: italic;
+    color: var(--tide);
+  }
+
+  .mandate-left p {
+    color: var(--slate);
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .mandate-right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mandate-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+
+  .mandate-row:first-child { border-top: 1px solid var(--line-strong); }
+  .mandate-row:last-child { border-bottom: 1px solid var(--line-strong); }
+
+  .mandate-row .key {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+
+  .mandate-row .val {
+    font-family: var(--display);
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .mandate-row .val em {
+    font-style: italic;
+    color: var(--tide);
+  }
+
+  .mandate-row .val .small {
+    display: block;
+    font-family: var(--body);
+    font-size: 15px;
+    color: var(--slate);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ============== FLEET (PORTFOLIO) ============== */
+  #fleet {
+    padding: 140px 0;
+    background: var(--paper-deep);
+    position: relative;
+  }
+
+  .fleet-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+
+  .fleet-header h2 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.05;
+    font-weight: 300;
+  }
+
+  .fleet-header h2 em { font-style: italic; color: var(--tide); }
+
+  .fleet-header .intro {
+    font-size: 17px;
+    color: var(--slate);
+    line-height: 1.65;
+    max-width: 460px;
+    justify-self: end;
+  }
+
+  .fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .vessel {
+    background: var(--paper);
+    padding: 40px 36px;
+    position: relative;
+    border-top: 1px solid var(--ink);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 460px;
+  }
+
+  .vessel:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(10, 22, 40, 0.08);
+  }
+
+  .vessel-marker {
+    position: absolute;
+    top: -8px;
+    left: 36px;
+    width: 14px; height: 14px;
+    background: var(--copper);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--paper-deep);
+  }
+
+  .vessel-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .vessel-meta .position {
+    color: var(--tide);
+  }
+
+  .vessel h3 {
+    font-size: 38px;
+    line-height: 1.05;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .vessel .vessel-tag {
+    font-style: italic;
+    color: var(--copper-deep);
+    font-size: 16px;
+    margin-bottom: 24px;
+    font-family: var(--display);
+  }
+
+  .vessel p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--slate);
+    margin-bottom: 16px;
+    flex: 1;
+  }
+
+  .vessel-coords {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--slate);
+    letter-spacing: 0.1em;
+  }
+
+  /* ============== CREW ============== */
+  #crew {
+    padding: 140px 0;
+    background: var(--paper);
+  }
+
+  .crew-header {
+    margin-bottom: 80px;
+    max-width: 880px;
+  }
+
+  .crew-header h2 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .crew-header h2 em { font-style: italic; color: var(--tide); }
+
+  .crew-header p {
+    font-size: 18px;
+    color: var(--slate);
+    line-height: 1.6;
+    max-width: 620px;
+  }
+
+  .crew-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .crew-card {
+    padding: 36px 24px 36px 0;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-strong);
+    position: relative;
+  }
+
+  .crew-card:not(:first-child) { padding-left: 24px; }
+  .crew-card:last-child { border-right: none; padding-right: 0; }
+
+  .crew-card .role {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .crew-card .crew-portrait {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: var(--ink);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    background-image:
+      linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  }
+
+  .crew-card.placeholder .crew-portrait {
+    background:
+      repeating-linear-gradient(45deg, var(--paper-deep) 0, var(--paper-deep) 8px, var(--paper) 8px, var(--paper) 16px);
+    border: 1px dashed var(--line-strong);
+  }
+
+  .crew-card .crew-portrait::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 22px; height: 22px;
+    border-top: 1px solid var(--copper);
+    border-left: 1px solid var(--copper);
+  }
+
+  .crew-card .crew-portrait::before {
+    content: '';
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 22px; height: 22px;
+    border-bottom: 1px solid var(--copper);
+    border-right: 1px solid var(--copper);
+  }
+
+  .crew-card .crew-portrait .initials {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 56px;
+    color: var(--paper);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    font-style: italic;
+  }
+
+  .crew-card.placeholder .crew-portrait .initials {
+    color: var(--slate-light);
+    font-style: normal;
+    font-size: 28px;
+    font-family: var(--mono);
+    letter-spacing: 0.18em;
+  }
+
+  .crew-card h3 {
+    font-size: 22px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+
+  .crew-card .title {
+    font-style: italic;
+    color: var(--tide);
+    font-size: 15px;
+    margin-bottom: 16px;
+    font-family: var(--display);
+  }
+
+  .crew-card .bio {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--slate);
+  }
+
+  .crew-card .bio strong { color: var(--ink); font-weight: 500; }
+
+  .crew-card.placeholder h3 { color: var(--slate-light); font-style: italic; }
+  .crew-card.placeholder .title { color: var(--slate-light); }
+
+  /* ============== ENGINE ROOM (AI AGENTS) ============== */
+  #engine {
+    padding: 140px 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #engine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(46, 120, 115, 0.15), transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(184, 132, 95, 0.08), transparent 50%);
+    pointer-events: none;
+  }
+
+  .engine-header {
+    margin-bottom: 80px;
+    max-width: 920px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .engine-header .section-label::before,
+  .engine-header .section-label::after { background: rgba(244, 236, 221, 0.2); }
+  .engine-header .section-label { color: var(--tide-pale); }
+  .engine-header .section-label .roman { color: var(--copper); }
+
+  .engine-header h2 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .engine-header h2 em {
+    font-style: italic;
+    color: var(--copper);
+  }
+
+  .engine-header p {
+    font-size: 18px;
+    color: var(--tide-pale);
+    line-height: 1.6;
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  .engine-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(244, 236, 221, 0.12);
+    border: 1px solid rgba(244, 236, 221, 0.12);
+    position: relative;
+    z-index: 2;
+  }
+
+  .agent {
+    padding: 40px 36px;
+    background: var(--ink);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .agent:hover { background: var(--ink-soft); }
+
+  .agent .agent-id {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--tide-pale);
+  }
+
+  .agent .agent-id .status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--copper);
+  }
+
+  .agent .agent-id .status::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--copper);
+    border-radius: 50%;
+  }
+
+  .agent h3 {
+    font-size: 38px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    line-height: 1.05;
+  }
+
+  .agent h3 em {
+    font-style: italic;
+    color: var(--copper);
+    font-size: 0.55em;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .agent .agent-role {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--tide-pale);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .agent p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--tide-pale);
+    font-weight: 300;
+  }
+
+  .agent-glyph {
+    position: absolute;
+    top: 36px;
+    right: 36px;
+    width: 32px; height: 32px;
+    opacity: 0.4;
+  }
+
+  /* ============== COUNSEL ============== */
+  #counsel {
+    padding: 140px 0;
+    background: var(--paper);
+  }
+
+  .counsel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .counsel-left h2 {
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .counsel-left h2 em { font-style: italic; color: var(--tide); }
+
+  .counsel-left p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--slate);
+  }
+
+  .counsel-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .counsel-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 24px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+
+  .counsel-item:first-child { border-top: 1px solid var(--line-strong); }
+  .counsel-item:last-child { border-bottom: 1px solid var(--line-strong); }
+
+  .counsel-item .index {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--copper);
+  }
+
+  .counsel-item .person {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .counsel-item .person .name {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .counsel-item .person .focus {
+    font-family: var(--body);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--slate);
+  }
+
+  .counsel-item.placeholder .name {
+    color: var(--slate-light);
+    font-style: italic;
+  }
+
+  .counsel-item .glyph {
+    width: 32px; height: 32px;
+    opacity: 0.5;
+  }
+
+  /* ============== HARBORS (OFFICES) ============== */
+  #harbors {
+    padding: 140px 0;
+    background: var(--paper-deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .harbors-header {
+    margin-bottom: 80px;
+    max-width: 880px;
+  }
+
+  .harbors-header h2 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .harbors-header h2 em { font-style: italic; color: var(--tide); }
+
+  .harbors-header p {
+    font-size: 18px;
+    color: var(--slate);
+    line-height: 1.65;
+    max-width: 620px;
+  }
+
+  .harbors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .harbor {
+    padding: 48px 32px 48px 0;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+
+  .harbor:not(:first-child) { padding-left: 32px; }
+  .harbor:last-child { border-right: none; padding-right: 0; }
+
+  .harbor .harbor-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--copper);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .harbor h3 {
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 8px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+  }
+
+  .harbor .country {
+    font-style: italic;
+    color: var(--slate);
+    font-size: 16px;
+    margin-bottom: 24px;
+    font-family: var(--display);
+  }
+
+  .harbor .coords {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+
+  .harbor .coords-label {
+    color: var(--slate);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .harbor p {
+    font-size: 14.5px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+
+  /* ============== CONTACT / FOOTER ============== */
+  #contact {
+    background: var(--ink-deep);
+    color: var(--paper);
+    padding: 140px 0 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-pre {
+    text-align: center;
+    margin-bottom: 80px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid rgba(244, 236, 221, 0.15);
+  }
+
+  .contact-pre .micro { color: var(--copper); margin-bottom: 32px; display: block; }
+
+  .contact-pre h2 {
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 1.05;
+    font-weight: 300;
+    margin-bottom: 40px;
+    letter-spacing: -0.025em;
+  }
+
+  .contact-pre h2 em {
+    font-style: italic;
+    color: var(--copper);
+  }
+
+  .contact-pre p {
+    font-size: 19px;
+    color: var(--tide-pale);
+    line-height: 1.6;
+    max-width: 580px;
+    margin: 0 auto 48px;
+    font-weight: 300;
+  }
+
+  .contact-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--display);
+    font-size: 28px;
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid var(--copper);
+    padding: 8px 0;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .contact-cta:hover { color: var(--copper); }
+
+  .contact-cta .arrow {
+    font-family: var(--mono);
+    font-size: 22px;
+    transition: transform 0.2s ease;
+  }
+
+  .contact-cta:hover .arrow { transform: translateX(8px); }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(244, 236, 221, 0.15);
+  }
+
+  .footer-brand .brand-mark {
+    width: 36px; height: 36px;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand .brand-name {
+    font-family: var(--display);
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+    color: var(--tide-pale);
+    line-height: 1.6;
+    max-width: 320px;
+    font-weight: 300;
+  }
+
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--tide-pale);
+    font-weight: 300;
+  }
+
+  .footer-col ul li .city-name {
+    display: block;
+    font-family: var(--display);
+    color: var(--paper);
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .footer-col ul li .city-coord {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--slate-light);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-col ul li a {
+    color: var(--tide-pale);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col ul li a:hover { color: var(--paper); }
+
+  .footer-bottom {
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--slate-light);
+  }
+
+  .footer-bottom .legal-links { display: flex; gap: 32px; }
+  .footer-bottom a { color: var(--slate-light); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--tide-pale); }
+
+  /* ============== UTILITY ANIMATIONS ============== */
+  /* Reveal classes intentionally inert — content appears as scrolled to */
+  .reveal { opacity: 1; transform: none; }
+  .reveal.delay-1,
+  .reveal.delay-2,
+  .reveal.delay-3,
+  .reveal.delay-4,
+  .reveal.delay-5 { transition-delay: 0s; }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 1024px) {
+    .container, .container-narrow { padding: 0 28px; }
+    nav { padding: 16px 28px; }
+    nav .nav-links { gap: 24px; }
+    .thesis-grid { grid-template-columns: 1fr; }
+    .thesis-card { border-right: none; border-bottom: 1px solid var(--line); padding: 36px 0 !important; }
+    .thesis-card:last-child { border-bottom: none; }
+    .fleet-grid, .engine-grid { grid-template-columns: 1fr 1fr; }
+    .crew-grid { grid-template-columns: repeat(3, 1fr); }
+    .mandate-grid, .counsel-grid, .fleet-header { grid-template-columns: 1fr; gap: 40px; }
+    .fleet-header .intro { justify-self: start; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .compass-rose { width: 240px; height: 240px; right: 4%; opacity: 0.18; }
+    .harbors-grid { grid-template-columns: 1fr; }
+    .harbor { border-right: none; border-bottom: 1px solid var(--line); padding: 36px 0 !important; }
+    .harbor:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .container, .container-narrow { padding: 0 20px; }
+    nav { padding: 14px 20px; }
+    nav .nav-links { display: none; }
+    section { padding: 90px 0 !important; }
+    #hero { padding: 110px 0 60px; min-height: auto; }
+    .compass-rose { display: none; }
+    .fleet-grid, .engine-grid, .footer-grid { grid-template-columns: 1fr; }
+    .crew-grid { grid-template-columns: 1fr 1fr; }
+    .crew-card, .thesis-card { padding: 28px 0 !important; }
+    .mandate-row { grid-template-columns: 1fr; gap: 8px; }
+    .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .hero-coord { flex: 1; min-width: 120px; }
+    .hero-coords { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav>
+  <a href="#top" class="brand">
+    <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M16 6 L16 26 M16 11 C13 11 11 13 11 16 L21 16 C21 13 19 11 16 11 Z M11 20 L21 20" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <circle cx="16" cy="9" r="1.4" fill="currentColor"/>
+    </svg>
+    <span class="brand-name">ANCRAGE</span>
+  </a>
+  <div class="nav-links">
+    <a href="#thesis">Thesis</a>
+    <a href="#mandate">Mandate</a>
+    <a href="#fleet">Portfolio</a>
+    <a href="#crew">Partners</a>
+    <a href="#engine">Workforce</a>
+    <a href="#harbors">Offices</a>
+  </div>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section id="hero">
+
+  <!-- Bathymetric depth lines backdrop -->
+  <svg class="hero-bathymetry" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <g stroke="#B8CFC9" stroke-width="0.6" fill="none">
+      <path d="M -100 400 Q 200 350 400 400 T 900 380" />
+      <path d="M -100 440 Q 200 390 400 440 T 900 420" />
+      <path d="M -100 480 Q 200 430 400 480 T 900 460" />
+      <path d="M -100 520 Q 220 470 420 520 T 900 500" />
+      <path d="M -100 560 Q 240 510 440 560 T 900 540" />
+      <path d="M -100 360 Q 180 310 380 360 T 900 340" />
+      <path d="M -100 320 Q 160 270 360 320 T 900 300" />
+      <path d="M -100 280 Q 140 230 340 280 T 900 260" />
+      <path d="M -100 240 Q 120 190 320 240 T 900 220" />
+      <path d="M -100 200 Q 100 150 300 200 T 900 180" />
+      <path d="M -100 600 Q 260 550 460 600 T 900 580" />
+      <path d="M -100 640 Q 280 590 480 640 T 900 620" />
+      <path d="M -100 680 Q 300 630 500 680 T 900 660" />
+    </g>
+  </svg>
+
+  <!-- Compass rose -->
+  <svg class="compass-rose" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <circle cx="100" cy="100" r="98" stroke="#B8845F" stroke-width="0.6"/>
+    <circle cx="100" cy="100" r="78" stroke="#B8CFC9" stroke-width="0.4"/>
+    <circle cx="100" cy="100" r="58" stroke="#B8CFC9" stroke-width="0.4"/>
+    <!-- Cardinal points -->
+    <path d="M100 8 L108 100 L100 192 L92 100 Z" fill="#B8845F" fill-opacity="0.35" stroke="#B8845F" stroke-width="0.6"/>
+    <path d="M8 100 L100 108 L192 100 L100 92 Z" fill="#B8CFC9" fill-opacity="0.18" stroke="#B8CFC9" stroke-width="0.4"/>
+    <!-- Inter-cardinal -->
+    <line x1="34" y1="34" x2="166" y2="166" stroke="#B8CFC9" stroke-width="0.3"/>
+    <line x1="166" y1="34" x2="34" y2="166" stroke="#B8CFC9" stroke-width="0.3"/>
+    <!-- Center dot -->
+    <circle cx="100" cy="100" r="3" fill="#B8845F"/>
+    <!-- N marker -->
+    <text x="100" y="22" text-anchor="middle" fill="#F4ECDD" font-family="JetBrains Mono" font-size="10" letter-spacing="2">N</text>
+    <text x="180" y="104" text-anchor="middle" fill="#B8CFC9" font-family="JetBrains Mono" font-size="9" letter-spacing="2">E</text>
+    <text x="100" y="186" text-anchor="middle" fill="#B8CFC9" font-family="JetBrains Mono" font-size="9" letter-spacing="2">S</text>
+    <text x="20" y="104" text-anchor="middle" fill="#B8CFC9" font-family="JetBrains Mono" font-size="9" letter-spacing="2">W</text>
+    <!-- Hash marks -->
+    <g stroke="#B8CFC9" stroke-width="0.5">
+      <line x1="100" y1="2" x2="100" y2="10"/>
+      <line x1="100" y1="190" x2="100" y2="198"/>
+      <line x1="2" y1="100" x2="10" y2="100"/>
+      <line x1="190" y1="100" x2="198" y2="100"/>
+    </g>
+  </svg>
+
+  <div class="container hero-content">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow reveal">
+          <span class="dot"></span>
+          <span>Est. MMXXVI · Toronto · Detroit · Hong Kong</span>
+        </div>
+
+        <h1 class="hero-title reveal delay-1">
+          A safe harbor<br>for <span class="italic">ambitious</span><br>capital.
+        </h1>
+
+        <p class="hero-lede reveal delay-2">
+          Ancrage is an AI-native private equity firm. We take control positions in mid-market companies at the intersection of artificial intelligence, physical industry, and regulated markets.
+        </p>
+
+        <div class="hero-coords reveal delay-3">
+          <div class="hero-coord">
+            <span class="city">Toronto</span>
+            <span class="lat">43°39′N · 79°23′W</span>
+          </div>
+          <div class="hero-coord">
+            <span class="city">Detroit</span>
+            <span class="lat">42°20′N · 83°02′W</span>
+          </div>
+          <div class="hero-coord">
+            <span class="city">Hong Kong</span>
+            <span class="lat">22°18′N · 114°10′E</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== THESIS ============== -->
+<section id="thesis">
+  <div class="container">
+    <div class="section-label reveal">
+      <span class="roman">I</span>
+      <span>Thesis</span>
+    </div>
+
+    <h2 class="thesis-headline display reveal delay-1">
+      We invest at the seam where <em>code meets concrete</em>, where <em>compliance shapes commerce</em>, and where execution, not capital, is the moat.
+    </h2>
+
+    <div class="thesis-grid">
+      <div class="thesis-card reveal delay-1">
+        <span class="num">01 / Artificial Intelligence</span>
+        <h3>Models that compound.</h3>
+        <p>Real value sits with operators who can deploy AI inside complex environments, not vendors selling licenses. Every Ancrage company has a path to running on AI workers from day one of our hold.</p>
+      </div>
+      <div class="thesis-card reveal delay-2">
+        <span class="num">02 / Physical Industry</span>
+        <h3>Atoms that still matter.</h3>
+        <p>Logistics, manufacturing, energy, healthcare, freight, mining, construction. Workflows where the physical layer makes the moat: hard to replicate, hard to disrupt, expensive to ignore.</p>
+      </div>
+      <div class="thesis-card reveal delay-3">
+        <span class="num">03 / Regulated Markets</span>
+        <h3>Rules that create scarcity.</h3>
+        <p>Healthcare, financial services, defense, utilities, life sciences. Compliance is a barrier to entry for the careless and a compounding asset for the disciplined operator.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TAGLINE ============== -->
+<section id="tagline">
+  <div class="container-narrow">
+    <h2 class="tagline-quote display reveal">
+      Talent is <em>everywhere</em>.<br>Opportunity isn't.
+    </h2>
+    <div class="tagline-rule reveal delay-1"></div>
+    <p class="tagline-body reveal delay-2">
+      We invest globally. North America is home base. Asia and the Gulf are structural. We do not need an opportunity to live within a postal code we already know.
+    </p>
+  </div>
+</section>
+
+<!-- ============== MANDATE ============== -->
+<section id="mandate">
+  <div class="container">
+    <div class="section-label reveal">
+      <span class="roman">II</span>
+      <span>Mandate</span>
+    </div>
+
+    <div class="mandate-grid">
+      <div class="mandate-left reveal delay-1">
+        <h2>What we do, what we don't.</h2>
+        <p>Ancrage takes control or buyout positions in mid-market businesses. The hold is long, the playbook is operational, and the leverage is the AI-native operating model we install alongside the team that built the company.</p>
+        <p>We are not a quarterly fund. We are not a fee aggregator. We are not interested in financial engineering as a substitute for execution.</p>
+      </div>
+
+      <div class="mandate-right reveal delay-2">
+        <div class="mandate-row">
+          <span class="key">Enterprise Value</span>
+          <span class="val">USD <em>$25M to $100M</em></span>
+        </div>
+        <div class="mandate-row">
+          <span class="key">Position</span>
+          <span class="val">Control or buyout<span class="small">Majority equity. Board control. Operator continuity preferred.</span></span>
+        </div>
+        <div class="mandate-row">
+          <span class="key">Sectors</span>
+          <span class="val">AI &times; Physical &times; Regulated<span class="small">Logistics, healthcare, financial services, manufacturing, energy, defense, real assets.</span></span>
+        </div>
+        <div class="mandate-row">
+          <span class="key">Geography</span>
+          <span class="val">Anywhere <em>opportunity</em> lives<span class="small">Canada, U.S., Asia-Pacific, GCC, Middle East. Where growth tailwinds and rule of law converge.</span></span>
+        </div>
+        <div class="mandate-row">
+          <span class="key">Hold</span>
+          <span class="val">Patient, capability-led<span class="small">We build the AI-native operating model alongside the team. Then we let it compound.</span></span>
+        </div>
+        <div class="mandate-row">
+          <span class="key">What We Pass On</span>
+          <span class="val">Pure software. Pre-revenue. Roll-ups for the sake of EBITDA arithmetic.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FLEET ============== -->
+<section id="fleet">
+  <div class="container">
+    <div class="section-label reveal">
+      <span class="roman">III</span>
+      <span>Portfolio</span>
+    </div>
+
+    <div class="fleet-header">
+      <h2 class="reveal delay-1">Three companies in the portfolio.</h2>
+      <p class="intro reveal delay-2">Three operating businesses anchor the firm. Each is a deployment of our thesis: AI-native execution applied to a physical or regulated category, with the operators who built the company still running it.</p>
+    </div>
+
+    <div class="fleet-grid">
+
+      <div class="vessel reveal delay-1">
+        <div class="vessel-marker"></div>
+        <div class="vessel-meta">
+          <span>I</span>
+          <span class="position">Active</span>
+        </div>
+        <h3>Gambit</h3>
+        <div class="vessel-tag">Forward-deployed AI workers</div>
+        <p>Custom AI workers built and embedded inside mid-market companies in regulated, operationally complex sectors. The platform compounds with every engagement. HP Enterprise as a global channel partner.</p>
+        <div class="vessel-coords">
+          <span>SEC · AI / OPS</span>
+          <span>HQ Waterloo, ON</span>
+        </div>
+      </div>
+
+      <div class="vessel reveal delay-2">
+        <div class="vessel-marker"></div>
+        <div class="vessel-meta">
+          <span>II</span>
+          <span class="position">Active</span>
+        </div>
+        <h3>Agent Astra</h3>
+        <div class="vessel-tag">AI-native freight forwarding</div>
+        <p>An AI-native consolidator of freight forwarders across North America. Operates the rewired model in production: document ingestion, carrier matching, pricing, compliance, all running on AI workers behind a senior commercial team.</p>
+        <div class="vessel-coords">
+          <span>SEC · LOGISTICS</span>
+          <span>HQ N. America</span>
+        </div>
+      </div>
+
+      <div class="vessel reveal delay-3">
+        <div class="vessel-marker"></div>
+        <div class="vessel-meta">
+          <span>III</span>
+          <span class="position">Active</span>
+        </div>
+        <h3>droppRWA</h3>
+        <div class="vessel-tag">Real-world asset tokenization</div>
+        <p>A real-world asset tokenization platform anchored in the Gulf, primarily active across the Middle East. Bringing physical assets onto programmable rails inside the regulatory frameworks that make institutional capital feel safe doing it.</p>
+        <div class="vessel-coords">
+          <span>SEC · FIN / REAL ASSETS</span>
+          <span>HQ Middle East</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== CREW ============== -->
+<section id="crew">
+  <div class="container">
+    <div class="section-label reveal">
+      <span class="roman">IV</span>
+      <span>Partners</span>
+    </div>
+
+    <div class="crew-header">
+      <h2 class="reveal delay-1">Five founders. <em>Operators first.</em></h2>
+      <p class="reveal delay-2">Each of us has run, built, scaled, or unwound a real company. We have closed deals, signed paychecks, fired people we cared about, and stayed past the parts of the work that hurt. That is the bar for sitting around this table.</p>
+    </div>
+
+    <div class="crew-grid">
+
+      <div class="crew-card reveal delay-1">
+        <span class="role">Founding Partner</span>
+        <div class="crew-portrait"><span class="initials">PB</span></div>
+        <h3>Patrick Belliveau</h3>
+        <div class="title">CEO, Gambit</div>
+        <p class="bio">15 years building technology companies and go-to-market across automotive and enterprise. <strong>Ex-Ford</strong>. Architect of the operating model behind Gambit's mid-market embed.</p>
+      </div>
+
+      <div class="crew-card reveal delay-2">
+        <span class="role">Founding Partner</span>
+        <div class="crew-portrait"><span class="initials">SD</span></div>
+        <h3>Sebastien Douville</h3>
+        <div class="title">M&amp;A · Corporate Development</div>
+        <p class="bio">20 years in M&amp;A, integration, and corporate development across PE-backed and high-growth companies. Co-CEO at Spearhead. <strong>Detroit + Toronto</strong>.</p>
+      </div>
+
+      <div class="crew-card reveal delay-3">
+        <span class="role">Founding Partner</span>
+        <div class="crew-portrait"><span class="initials">RB</span></div>
+        <h3>Ryan Burgio</h3>
+        <div class="title">Brand · Creative Strategy</div>
+        <p class="bio">20 years in brand and creative strategy for growth-stage companies. The voice of the firm. Translates technical work into language buyers actually act on.</p>
+      </div>
+
+      <div class="crew-card placeholder reveal delay-4">
+        <span class="role">Founding Partner</span>
+        <div class="crew-portrait"><span class="initials">IV</span></div>
+        <h3>To Be Announced</h3>
+        <div class="title">Investments</div>
+        <p class="bio">Senior PE operator joining the founding partnership. Profile to be announced ahead of fund close.</p>
+      </div>
+
+      <div class="crew-card placeholder reveal delay-5">
+        <span class="role">Founding Partner</span>
+        <div class="crew-portrait"><span class="initials">V</span></div>
+        <h3>To Be Announced</h3>
+        <div class="title">Operating</div>
+        <p class="bio">Senior operating partner joining the founding partnership. Profile to be announced ahead of fund close.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== ENGINE ROOM ============== -->
+<section id="engine">
+  <div class="container">
+    <div class="engine-header">
+      <div class="section-label reveal">
+        <span class="roman">V</span>
+        <span>Workforce</span>
+      </div>
+      <h2 class="reveal delay-1">Six AI workers. <em>On staff.</em></h2>
+      <p class="reveal delay-2">Ancrage is the first PE firm where the deal team includes named AI operators. They source, screen, model, monitor, and report alongside our partners. Every memo, screen, and KPI dashboard the firm produces moves through them.</p>
+    </div>
+
+    <div class="engine-grid">
+
+      <div class="agent reveal delay-1">
+        <div class="agent-id">
+          <span>I</span>
+          <span class="status">In production</span>
+        </div>
+        <svg class="agent-glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#B8845F" stroke-width="0.8"/><path d="M16 6 V26 M6 16 H26" stroke="#B8845F" stroke-width="0.8"/></svg>
+        <h3>Bogan <em>· Origination</em></h3>
+        <div class="agent-role">Deal Sourcing &amp; Screening</div>
+        <p>Reads CIMs, runs deal screens, builds buyer and seller profiles, drafts initial memos, surfaces deals matching the mandate. Already in production inside Spearhead.</p>
+      </div>
+
+      <div class="agent reveal delay-2">
+        <div class="agent-id">
+          <span>II</span>
+          <span class="status">In production</span>
+        </div>
+        <svg class="agent-glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#B8845F" stroke-width="0.8"/><path d="M16 6 V26 M16 16 L23 9 M16 16 L9 9 M16 16 L23 23 M16 16 L9 23" stroke="#B8845F" stroke-width="0.8"/></svg>
+        <h3>Helm <em>· Diligence</em></h3>
+        <div class="agent-role">Due Diligence Partner</div>
+        <p>Coordinates diligence streams across financial, commercial, legal, and operational. Ingests data rooms, flags anomalies, drafts findings, keeps the IC in sync with the deal team.</p>
+      </div>
+
+      <div class="agent reveal delay-3">
+        <div class="agent-id">
+          <span>III</span>
+          <span class="status">In production</span>
+        </div>
+        <svg class="agent-glyph" viewBox="0 0 32 32" fill="none"><rect x="6" y="6" width="20" height="20" stroke="#B8845F" stroke-width="0.8"/><line x1="6" y1="12" x2="26" y2="12" stroke="#B8845F" stroke-width="0.8"/><line x1="6" y1="18" x2="26" y2="18" stroke="#B8845F" stroke-width="0.8"/></svg>
+        <h3>Ledger <em>· Memos</em></h3>
+        <div class="agent-role">IC Memo &amp; Thesis Drafting</div>
+        <p>Writes IC memos in the firm's voice. Drafts investment theses, value creation plans, and post-mortems. Produces every working document at the standard a partner would sign.</p>
+      </div>
+
+      <div class="agent reveal delay-1">
+        <div class="agent-id">
+          <span>IV</span>
+          <span class="status">In production</span>
+        </div>
+        <svg class="agent-glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="6" stroke="#B8845F" stroke-width="0.8"/><circle cx="16" cy="16" r="13" stroke="#B8845F" stroke-width="0.8" stroke-dasharray="2 2"/><line x1="16" y1="2" x2="16" y2="6" stroke="#B8845F" stroke-width="0.8"/></svg>
+        <h3>Sentinel <em>· Monitoring</em></h3>
+        <div class="agent-role">Portfolio &amp; KPI Surveillance</div>
+        <p>Watches portfolio company KPIs daily. Flags trend breaks, covenant risk, customer concentration drift, and pricing changes before they hit a quarterly board pack.</p>
+      </div>
+
+      <div class="agent reveal delay-2">
+        <div class="agent-id">
+          <span>V</span>
+          <span class="status">In production</span>
+        </div>
+        <svg class="agent-glyph" viewBox="0 0 32 32" fill="none"><path d="M4 16 Q12 4 20 16 T36 16" stroke="#B8845F" stroke-width="0.8" fill="none"/><path d="M4 22 Q12 10 20 22 T36 22" stroke="#B8845F" stroke-width="0.8" fill="none"/></svg>
+        <h3>Cartographer <em>· Mapping</em></h3>
+        <div class="agent-role">Sector &amp; Market Intelligence</div>
+        <p>Builds and maintains sector maps across our investment perimeter. Tracks competitors, regulatory shifts, technology adoption, capital flows. The firm's living atlas.</p>
+      </div>
+
+      <div class="agent reveal delay-3">
+        <div class="agent-id">
+          <span>VI</span>
+          <span class="status">In production</span>
+        </div>
+        <svg class="agent-glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#B8845F" stroke-width="0.8"/><circle cx="16" cy="16" r="3" fill="#B8845F"/><line x1="16" y1="2" x2="16" y2="8" stroke="#B8845F" stroke-width="1"/></svg>
+        <h3>Quartermaster <em>· Reporting</em></h3>
+        <div class="agent-role">LP Reporting &amp; Capital Stack</div>
+        <p>Maintains the cap table, tracks distributions, drafts LP letters, runs fund-level performance reporting. Handles the work that grows linearly with AUM and steals partner time.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== COUNSEL ============== -->
+<section id="counsel">
+  <div class="container">
+    <div class="section-label reveal">
+      <span class="roman">VI</span>
+      <span>Advisors</span>
+    </div>
+
+    <div class="counsel-grid">
+      <div class="counsel-left reveal delay-1">
+        <h2>Advisors who've been there.</h2>
+        <p>The advisory bench is small and senior. Operators who have built, sold, regulated, and rebuilt the kinds of companies we are buying. They sit at the table on every committee call, every diligence escalation, and every value-creation review.</p>
+      </div>
+
+      <div class="counsel-list reveal delay-2">
+        <div class="counsel-item">
+          <span class="index">001</span>
+          <div class="person">
+            <span class="name">Teddy Wieser</span>
+            <span class="focus">Capital markets &amp; M&amp;A advisory</span>
+          </div>
+          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#1E4D4A" stroke-width="0.8"/><circle cx="16" cy="16" r="2" fill="#1E4D4A"/></svg>
+        </div>
+        <div class="counsel-item placeholder">
+          <span class="index">002</span>
+          <div class="person">
+            <span class="name">To Be Announced</span>
+            <span class="focus">Healthcare &amp; regulated industries</span>
+          </div>
+          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
+        </div>
+        <div class="counsel-item placeholder">
+          <span class="index">003</span>
+          <div class="person">
+            <span class="name">To Be Announced</span>
+            <span class="focus">Logistics &amp; supply chain</span>
+          </div>
+          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
+        </div>
+        <div class="counsel-item placeholder">
+          <span class="index">004</span>
+          <div class="person">
+            <span class="name">To Be Announced</span>
+            <span class="focus">Asia-Pacific operating partner</span>
+          </div>
+          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
+        </div>
+        <div class="counsel-item placeholder">
+          <span class="index">005</span>
+          <div class="person">
+            <span class="name">To Be Announced</span>
+            <span class="focus">Gulf &amp; Middle East advisory</span>
+          </div>
+          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HARBORS ============== -->
+<section id="harbors">
+  <div class="container">
+    <div class="section-label reveal">
+      <span class="roman">VII</span>
+      <span>Offices</span>
+    </div>
+
+    <div class="harbors-header">
+      <h2 class="reveal delay-1">Three cities. <em>One firm.</em></h2>
+      <p class="reveal delay-2">We chose our cities deliberately. North America for capital and customers. Asia for scale and speed. Each office is its own base, not a branch. Partners live where they work.</p>
+    </div>
+
+    <div class="harbors-grid">
+
+      <div class="harbor reveal delay-1">
+        <span class="harbor-num">I</span>
+        <h3>Toronto</h3>
+        <div class="country">Ontario, Canada</div>
+        <span class="coords-label">Coordinates</span>
+        <div class="coords">43°39′13″N<br>79°23′00″W</div>
+        <p>Founding office. Capital, talent, and proximity to Canadian PE and family office relationships. Ancrage partnership and core operating team.</p>
+      </div>
+
+      <div class="harbor reveal delay-2">
+        <span class="harbor-num">II</span>
+        <h3>Detroit</h3>
+        <div class="country">Michigan, United States</div>
+        <span class="coords-label">Coordinates</span>
+        <div class="coords">42°19′53″N<br>83°02′45″W</div>
+        <p>U.S. base. Industrial America, manufacturing, mobility, freight. Where the physical economy still pulls capital, and where mid-market control deals trade at a discount to the coasts.</p>
+      </div>
+
+      <div class="harbor reveal delay-3">
+        <span class="harbor-num">III</span>
+        <h3>Hong Kong</h3>
+        <div class="country">Special Administrative Region</div>
+        <span class="coords-label">Coordinates</span>
+        <div class="coords">22°18′12″N<br>114°10′10″E</div>
+        <p>Asia anchor. Access to Greater China, Southeast Asia, and Gulf capital flows. Where the next two decades of mid-market growth will be priced and won.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACT / FOOTER ============== -->
+<section id="contact">
+  <div class="container">
+
+    <div class="contact-pre reveal">
+      <span class="micro">Contact</span>
+      <h2 class="display">If you have a <em>company</em>,<br>we'd like to hear about it.</h2>
+      <p>Ancrage looks at deals with $25M to $100M of enterprise value across AI-adjacent, physical, and regulated sectors. We are most useful when an owner is thinking about the next ten years, not the next quarter. Bring us the company. We bring the operating model.</p>
+      <a href="mailto:harbor@ancrage.capital" class="contact-cta">harbor@ancrage.capital <span class="arrow">&rarr;</span></a>
+    </div>
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #F4ECDD">
+          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M16 6 L16 26 M16 11 C13 11 11 13 11 16 L21 16 C21 13 19 11 16 11 Z M11 20 L21 20" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <circle cx="16" cy="9" r="1.4" fill="currentColor"/>
+        </svg>
+        <div class="brand-name">ANCRAGE</div>
+        <p>An AI-native private equity firm taking control positions in mid-market companies at the intersection of artificial intelligence, physical industry, and regulated markets.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Offices</h4>
+        <ul>
+          <li><span class="city-name">Toronto</span></li>
+          <li><span class="city-name">Detroit</span></li>
+          <li><span class="city-name">Hong Kong</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#thesis">Thesis</a></li>
+          <li><a href="#mandate">Mandate</a></li>
+          <li><a href="#fleet">Portfolio</a></li>
+          <li><a href="#crew">Partners</a></li>
+          <li><a href="#engine">Workforce</a></li>
+          <li><a href="#harbors">Offices</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:harbor@ancrage.capital">harbor@ancrage.capital</a></li>
+          <li><a href="mailto:deals@ancrage.capital">deals@ancrage.capital</a></li>
+          <li><a href="mailto:lp@ancrage.capital">lp@ancrage.capital</a></li>
+          <li><a href="mailto:press@ancrage.capital">press@ancrage.capital</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ancrage Capital. All rights reserved.</span>
+      <div class="legal-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Disclosures</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Nav background intensifies on scroll
+  const nav = document.querySelector('nav');
+  const handleScroll = () => {
+    if (window.scrollY > 60) {
+      nav.style.padding = '12px 40px';
+      nav.style.background = 'rgba(244, 236, 221, 0.95)';
+    } else {
+      nav.style.padding = '18px 40px';
+      nav.style.background = 'rgba(244, 236, 221, 0.85)';
+    }
+  };
+  window.addEventListener('scroll', handleScroll, { passive: true });
+</script>
+
+</body>
+</html>
