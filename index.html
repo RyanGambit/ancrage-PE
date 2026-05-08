@@ -517,136 +517,25 @@
     position: relative;
   }
 
-  .fleet-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: end;
-    margin-bottom: 80px;
+  .fleet-statement {
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 0;
   }
 
-  .fleet-header h2 {
-    font-size: clamp(40px, 6vw, 76px);
-    line-height: 1.05;
-    font-weight: 300;
-  }
-
-  .fleet-header h2 em { font-style: italic; color: var(--tide); }
-
-  .fleet-header .intro {
-    font-size: 17px;
-    color: var(--slate);
-    line-height: 1.65;
-    max-width: 460px;
-    justify-self: end;
-  }
-
-  .fleet-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-  }
-
-  .vessel {
-    background: var(--paper);
-    padding: 40px 36px;
-    position: relative;
-    border-top: 1px solid var(--ink);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    display: flex;
-    flex-direction: column;
-    min-height: 460px;
-  }
-
-  .vessel:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 48px rgba(10, 22, 40, 0.08);
-  }
-
-  .vessel-marker {
-    position: absolute;
-    top: -8px;
-    left: 36px;
-    width: 14px; height: 14px;
-    background: var(--copper);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--paper-deep);
-  }
-
-  .vessel-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 32px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--slate);
-  }
-
-  .vessel-meta .position {
-    color: var(--tide);
-  }
-
-  .vessel h3 {
-    font-size: 38px;
-    line-height: 1.05;
-    margin-bottom: 12px;
-    font-weight: 400;
-  }
-
-  .vessel h3 .vessel-link {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-
-  .vessel h3 .vessel-link::after {
-    content: '↗';
-    display: inline-block;
-    margin-left: 0.35em;
-    font-size: 0.55em;
-    color: var(--copper);
-    vertical-align: 0.4em;
-    transition: transform 0.2s ease;
-  }
-
-  .vessel h3 .vessel-link:hover {
-    color: var(--tide);
-  }
-
-  .vessel h3 .vessel-link:hover::after {
-    transform: translate(2px, -2px);
-  }
-
-  .vessel .vessel-tag {
-    font-style: italic;
-    color: var(--copper-deep);
-    font-size: 16px;
-    margin-bottom: 24px;
+  .fleet-statement p {
     font-family: var(--display);
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.25;
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: -0.015em;
   }
 
-  .vessel p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--slate);
-    margin-bottom: 16px;
-    flex: 1;
-  }
-
-  .vessel-coords {
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--slate);
-    letter-spacing: 0.1em;
+  .fleet-statement em {
+    font-style: italic;
+    color: var(--tide);
   }
 
   /* ============== CREW ============== */
@@ -1101,10 +990,9 @@
     .thesis-grid { grid-template-columns: 1fr; }
     .thesis-card { border-right: none; border-bottom: 1px solid var(--line); padding: 36px 0 !important; }
     .thesis-card:last-child { border-bottom: none; }
-    .fleet-grid, .engine-grid { grid-template-columns: 1fr 1fr; }
+    .engine-grid { grid-template-columns: 1fr 1fr; }
     .crew-grid { grid-template-columns: repeat(3, 1fr); }
-    .mandate-grid, .fleet-header { grid-template-columns: 1fr; gap: 40px; }
-    .fleet-header .intro { justify-self: start; }
+    .mandate-grid { grid-template-columns: 1fr; gap: 40px; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .compass-rose { width: 240px; height: 240px; right: 4%; opacity: 0.18; }
   }
@@ -1117,7 +1005,7 @@
     section { padding: 90px 0 !important; }
     #hero { padding: 110px 0 60px; min-height: auto; }
     .compass-rose { display: none; }
-    .fleet-grid, .engine-grid, .footer-grid { grid-template-columns: 1fr; }
+    .engine-grid, .footer-grid { grid-template-columns: 1fr; }
     .crew-grid { grid-template-columns: 1fr 1fr; }
     .crew-card, .thesis-card { padding: 28px 0 !important; }
     .mandate-row { grid-template-columns: 1fr; gap: 8px; }
@@ -1309,58 +1197,8 @@
       <span>Portfolio</span>
     </div>
 
-    <div class="fleet-header">
-      <h2 class="reveal delay-1">Three companies in the portfolio.</h2>
-      <p class="intro reveal delay-2">Three operating businesses anchor the firm. Each is a deployment of our thesis: AI-native execution applied to a physical or regulated category, with the operators who built the company still running it.</p>
-    </div>
-
-    <div class="fleet-grid">
-
-      <div class="vessel reveal delay-1">
-        <div class="vessel-marker"></div>
-        <div class="vessel-meta">
-          <span>I</span>
-          <span class="position">Active</span>
-        </div>
-        <h3><a href="https://gambitco.io" target="_blank" rel="noopener noreferrer" class="vessel-link">Gambit</a></h3>
-        <div class="vessel-tag">Forward-deployed AI workers</div>
-        <p>Custom AI workers built and embedded inside mid-market companies in regulated, operationally complex sectors. The platform compounds with every engagement. HP Enterprise as a global channel partner.</p>
-        <div class="vessel-coords">
-          <span>SEC · AI / OPS</span>
-          <span>HQ Waterloo, ON</span>
-        </div>
-      </div>
-
-      <div class="vessel reveal delay-2">
-        <div class="vessel-marker"></div>
-        <div class="vessel-meta">
-          <span>II</span>
-          <span class="position">Active</span>
-        </div>
-        <h3>Agent Astra</h3>
-        <div class="vessel-tag">AI-native freight forwarding</div>
-        <p>An AI-native consolidator of freight forwarders across North America. Operates the rewired model in production: document ingestion, carrier matching, pricing, compliance, all running on AI workers behind a senior commercial team.</p>
-        <div class="vessel-coords">
-          <span>SEC · LOGISTICS</span>
-          <span>HQ N. America</span>
-        </div>
-      </div>
-
-      <div class="vessel reveal delay-3">
-        <div class="vessel-marker"></div>
-        <div class="vessel-meta">
-          <span>III</span>
-          <span class="position">Active</span>
-        </div>
-        <h3>droppRWA</h3>
-        <div class="vessel-tag">Real-world asset tokenization</div>
-        <p>A real-world asset tokenization platform anchored in the Gulf, primarily active across the Middle East. Bringing physical assets onto programmable rails inside the regulatory frameworks that make institutional capital feel safe doing it.</p>
-        <div class="vessel-coords">
-          <span>SEC · FIN / REAL ASSETS</span>
-          <span>HQ Middle East</span>
-        </div>
-      </div>
-
+    <div class="fleet-statement reveal delay-1">
+      <p>We are proud to have invested behind some <em>exceptional teams</em>, and continue to search for great partners every day.</p>
     </div>
   </div>
 </section>
