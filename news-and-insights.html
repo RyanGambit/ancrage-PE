@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>News &amp; Insights · Ancrage</title>
+<meta name="description" content="Long-form thinking on AI, capital, and the operators rebuilding mid-market businesses." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* ============== NEWS PAGE ============== */
+  #news-hero {
+    padding: 200px 0 100px;
+    background: var(--paper);
+  }
+
+  .news-hero-inner {
+    max-width: 880px;
+  }
+
+  .news-hero-inner h1 {
+    font-size: clamp(56px, 8vw, 112px);
+    line-height: 1;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin: 24px 0 32px;
+  }
+
+  .news-hero-inner h1 em {
+    font-style: italic;
+    color: var(--tide);
+  }
+
+  .news-hero-inner p {
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--slate);
+    line-height: 1.5;
+    max-width: 680px;
+  }
+
+  /* ============== CAROUSEL ============== */
+  #news-carousel {
+    padding: 60px 0 140px;
+    background: var(--paper);
+  }
+
+  .carousel-shell {
+    position: relative;
+  }
+
+  .carousel-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .carousel-counter {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .carousel-counter strong {
+    color: var(--ink);
+    font-weight: 500;
+    margin: 0 4px;
+  }
+
+  .carousel-buttons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .carousel-btn:disabled,
+  .carousel-btn[aria-disabled="true"] {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .carousel-btn:disabled:hover,
+  .carousel-btn[aria-disabled="true"]:hover {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line-strong);
+  }
+
+  .carousel-track-wrap {
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 48px) / 3);
+    gap: 24px;
+    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track { transition: none; }
+  }
+
+  .news-card {
+    background: var(--bone);
+    border-top: 1px solid var(--ink);
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    min-height: 360px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+  }
+
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(10, 22, 40, 0.08);
+  }
+
+  .news-card .news-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .news-card .news-date {
+    color: var(--slate);
+  }
+
+  .news-card h3 {
+    font-size: 28px;
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 16px;
+    flex: 0 0 auto;
+  }
+
+  .news-card .teaser {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--slate);
+    flex: 1;
+    margin-bottom: 24px;
+  }
+
+  .news-card .read-more {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--copper);
+    padding-bottom: 4px;
+    align-self: flex-start;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .news-card .read-more:hover {
+    color: var(--tide);
+    border-bottom-color: var(--tide);
+  }
+
+  .news-card.placeholder .news-meta { color: var(--slate-light); }
+  .news-card.placeholder h3 { color: var(--slate-light); font-style: italic; }
+  .news-card.placeholder .read-more {
+    color: var(--slate-light);
+    border-bottom-color: var(--slate-light);
+    pointer-events: none;
+  }
+
+  .carousel-footer {
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  .view-all {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 4px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .view-all:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  @media (max-width: 1024px) {
+    .carousel-track { grid-auto-columns: calc((100% - 24px) / 2); }
+  }
+
+  @media (max-width: 720px) {
+    #news-hero { padding: 140px 0 60px; }
+    #news-carousel { padding: 40px 0 90px; }
+    .carousel-track { grid-auto-columns: 100%; }
+    .news-card { min-height: 300px; padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav>
+  <a href="/" class="brand">
+    <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M16 6 L16 26 M16 11 C13 11 11 13 11 16 L21 16 C21 13 19 11 16 11 Z M11 20 L21 20" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <circle cx="16" cy="9" r="1.4" fill="currentColor"/>
+    </svg>
+    <span class="brand-name">ANCRAGE</span>
+  </a>
+  <div class="nav-links">
+    <a href="/#thesis">Thesis</a>
+    <a href="/#mandate">Mandate</a>
+    <a href="/#fleet">Portfolio</a>
+    <a href="/#crew">Partners</a>
+    <a href="/#engine">Workforce</a>
+    <a href="/news-and-insights">News &amp; Insights</a>
+  </div>
+  <a href="/#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section id="news-hero">
+  <div class="container">
+    <div class="news-hero-inner">
+      <div class="section-label">
+        <span class="roman">·</span>
+        <span>News &amp; Insights</span>
+      </div>
+      <h1>Long-form thinking on <em>AI, capital,</em> and the operators rebuilding mid-market businesses.</h1>
+      <p>Posts, interviews, and field notes from the partners. Updated as the work happens.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CAROUSEL ============== -->
+<section id="news-carousel">
+  <div class="container">
+    <div class="carousel-shell" tabindex="0" aria-roledescription="carousel" aria-label="News and insights">
+      <div class="carousel-controls">
+        <span class="carousel-counter"><strong id="carousel-current">1</strong>/<strong id="carousel-total">4</strong></span>
+        <div class="carousel-buttons">
+          <button class="carousel-btn" id="carousel-prev" aria-label="Previous post">←</button>
+          <button class="carousel-btn" id="carousel-next" aria-label="Next post">→</button>
+        </div>
+      </div>
+
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="carousel-track">
+
+          <article class="news-card placeholder">
+            <div class="news-meta"><span>Sample post</span><span class="news-date">Coming soon</span></div>
+            <h3>Title coming soon</h3>
+            <p class="teaser">Sebastien is exporting his existing LinkedIn writing into the Ancrage feed. Real titles, dates, and teaser copy will replace this placeholder before launch.</p>
+            <a href="#" class="read-more" aria-disabled="true">Read more →</a>
+          </article>
+
+          <article class="news-card placeholder">
+            <div class="news-meta"><span>Sample post</span><span class="news-date">Coming soon</span></div>
+            <h3>Title coming soon</h3>
+            <p class="teaser">The carousel mechanics, layout, and visual treatment are real. Cards will populate once the export lands. Three visible at desktop, one at mobile.</p>
+            <a href="#" class="read-more" aria-disabled="true">Read more →</a>
+          </article>
+
+          <article class="news-card placeholder">
+            <div class="news-meta"><span>Sample post</span><span class="news-date">Coming soon</span></div>
+            <h3>Title coming soon</h3>
+            <p class="teaser">Auto-advance, pause-on-hover, and keyboard navigation are all wired. Reduced-motion preferences disable auto-advance and require manual control.</p>
+            <a href="#" class="read-more" aria-disabled="true">Read more →</a>
+          </article>
+
+          <article class="news-card placeholder">
+            <div class="news-meta"><span>Sample post</span><span class="news-date">Coming soon</span></div>
+            <h3>Title coming soon</h3>
+            <p class="teaser">Cards link out to the full post. Whether that opens an inline modal, a dedicated route, or the original LinkedIn URL is a per-post decision once content lands.</p>
+            <a href="#" class="read-more" aria-disabled="true">Read more →</a>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="carousel-footer">
+        <a href="#" class="view-all" aria-disabled="true">View all posts →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACT / FOOTER ============== -->
+<section id="contact">
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #F4ECDD">
+          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M16 6 L16 26 M16 11 C13 11 11 13 11 16 L21 16 C21 13 19 11 16 11 Z M11 20 L21 20" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <circle cx="16" cy="9" r="1.4" fill="currentColor"/>
+        </svg>
+        <div class="brand-name">ANCRAGE</div>
+        <p>A forward-deployed private investment firm at the intersection of artificial intelligence, physical industry, and regulated markets.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Offices</h4>
+        <ul>
+          <li><span class="city-name">Toronto</span> <span class="city-tag">HQ</span></li>
+          <li><span class="city-name">Detroit</span> <span class="city-tag">US</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="/#thesis">Thesis</a></li>
+          <li><a href="/#mandate">Mandate</a></li>
+          <li><a href="/#fleet">Portfolio</a></li>
+          <li><a href="/#crew">Partners</a></li>
+          <li><a href="/#engine">Workforce</a></li>
+          <li><a href="/news-and-insights">News &amp; Insights</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:harbor@ancrage.io">harbor@ancrage.io</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Ancrage. All rights reserved.</span>
+      <div class="legal-links">
+        <a href="#" class="footer-social" aria-label="LinkedIn (link pending)" title="LinkedIn (link pending)" data-disabled="true">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect width="4" height="12" x="2" y="9"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/cookies">Cookies Settings</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Nav background intensifies on scroll
+  const nav = document.querySelector('nav');
+  const handleScroll = () => {
+    if (window.scrollY > 60) {
+      nav.style.padding = '12px 40px';
+      nav.style.background = 'rgba(244, 236, 221, 0.95)';
+    } else {
+      nav.style.padding = '18px 40px';
+      nav.style.background = 'rgba(244, 236, 221, 0.85)';
+    }
+  };
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // Carousel
+  (() => {
+    const track = document.getElementById('carousel-track');
+    if (!track) return;
+    const cards = track.querySelectorAll('.news-card');
+    if (!cards.length) return;
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const counterCurrent = document.getElementById('carousel-current');
+    const counterTotal = document.getElementById('carousel-total');
+    const shell = document.querySelector('.carousel-shell');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    counterTotal.textContent = cards.length;
+
+    let perView = 3;
+    const computePerView = () => {
+      const w = window.innerWidth;
+      perView = w <= 720 ? 1 : w <= 1024 ? 2 : 3;
+    };
+    computePerView();
+
+    let index = 0;
+    const maxIndex = () => Math.max(0, cards.length - perView);
+
+    const update = () => {
+      const card = cards[0];
+      const cardW = card.getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 24;
+      track.style.transform = `translateX(${-(cardW + gap) * index}px)`;
+      counterCurrent.textContent = Math.min(index + 1, cards.length);
+      prevBtn.toggleAttribute('disabled', index === 0);
+      nextBtn.toggleAttribute('disabled', index >= maxIndex());
+    };
+
+    const next = () => {
+      index = index >= maxIndex() ? 0 : index + 1;
+      update();
+    };
+    const prev = () => {
+      index = index <= 0 ? maxIndex() : index - 1;
+      update();
+    };
+
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+
+    shell.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    });
+
+    let auto = null;
+    const startAuto = () => {
+      if (reduceMotion.matches) return;
+      stopAuto();
+      auto = setInterval(next, 7000);
+    };
+    const stopAuto = () => { if (auto) { clearInterval(auto); auto = null; } };
+
+    shell.addEventListener('mouseenter', stopAuto);
+    shell.addEventListener('mouseleave', startAuto);
+    shell.addEventListener('focusin', stopAuto);
+    shell.addEventListener('focusout', startAuto);
+    document.addEventListener('visibilitychange', () => {
+      document.hidden ? stopAuto() : startAuto();
+    });
+
+    window.addEventListener('resize', () => {
+      const before = perView;
+      computePerView();
+      if (perView !== before) {
+        index = Math.min(index, maxIndex());
+      }
+      update();
+    });
+
+    update();
+    startAuto();
+  })();
+</script>
+
+</body>
+</html>
