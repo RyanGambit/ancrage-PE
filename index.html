@@ -281,6 +281,36 @@
     color: var(--copper);
   }
 
+  .hero-rotator {
+    display: inline-block;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  .hero-rotator::before {
+    content: 'Reinvention.';
+    visibility: hidden;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .hero-rotator .hero-word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity 600ms ease;
+    will-change: opacity;
+  }
+
+  .hero-rotator .hero-word.is-active {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rotator .hero-word { transition: none; }
+  }
+
   .hero-lede {
     font-size: clamp(18px, 1.6vw, 22px);
     line-height: 1.5;
@@ -1406,15 +1436,15 @@
       <div>
         <div class="hero-eyebrow reveal">
           <span class="dot"></span>
-          <span>Est. MMXXVI · Toronto · Detroit · Hong Kong</span>
+          <span>Est. MMXXVI · Toronto · Detroit</span>
         </div>
 
         <h1 class="hero-title reveal delay-1">
-          A safe harbor<br>for <span class="italic">ambitious</span><br>capital.
+          A safe harbor<br>for <span class="italic hero-rotator" aria-live="polite"><span class="hero-word is-active">Ambition.</span><span class="hero-word">Conviction.</span><span class="hero-word">Velocity.</span><span class="hero-word">Reinvention.</span><span class="hero-word">Legacy.</span></span>
         </h1>
 
         <p class="hero-lede reveal delay-2">
-          Ancrage is an AI-native private equity firm. We take control positions in mid-market companies at the intersection of artificial intelligence, physical industry, and regulated markets.
+          Ancrage is a forward-deployed private investment firm. We thrive at the intersection of artificial intelligence, physical industry, and regulated markets.
         </p>
 
         <div class="hero-coords reveal delay-3">
@@ -1425,10 +1455,6 @@
           <div class="hero-coord">
             <span class="city">Detroit</span>
             <span class="lat">42°20′N · 83°02′W</span>
-          </div>
-          <div class="hero-coord">
-            <span class="city">Hong Kong</span>
-            <span class="lat">22°18′N · 114°10′E</span>
           </div>
         </div>
       </div>
@@ -1919,6 +1945,33 @@
     }
   };
   window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // Hero word rotator
+  (() => {
+    const rotator = document.querySelector('.hero-rotator');
+    if (!rotator) return;
+    const words = rotator.querySelectorAll('.hero-word');
+    if (words.length < 2) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduceMotion.matches) return;
+
+    let i = 0;
+    let timer = null;
+    const tick = () => {
+      words[i].classList.remove('is-active');
+      i = (i + 1) % words.length;
+      words[i].classList.add('is-active');
+    };
+    const start = () => { timer = setInterval(tick, 3100); };
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+    start();
+    rotator.addEventListener('mouseenter', stop);
+    rotator.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', () => {
+      document.hidden ? stop() : (timer || start());
+    });
+  })();
 </script>
 
 </body>
