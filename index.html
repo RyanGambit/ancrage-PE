@@ -969,9 +969,28 @@
     color: var(--slate-light);
   }
 
-  .footer-bottom .legal-links { display: flex; gap: 32px; }
+  .footer-bottom .legal-links { display: flex; gap: 28px; align-items: center; }
   .footer-bottom a { color: var(--slate-light); text-decoration: none; }
   .footer-bottom a:hover { color: var(--tide-pale); }
+  .footer-bottom a.footer-social {
+    display: inline-flex;
+    align-items: center;
+    color: var(--slate-light);
+  }
+  .footer-bottom a[data-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.45;
+  }
+
+  .footer-col ul li .city-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--slate-light);
+    text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: 2px;
+  }
 
   /* ============== UTILITY ANIMATIONS ============== */
   /* Reveal classes intentionally inert — content appears as scrolled to */
@@ -1033,6 +1052,7 @@
     <a href="#fleet">Portfolio</a>
     <a href="#crew">Partners</a>
     <a href="#engine">Workforce</a>
+    <a href="/news-and-insights">News &amp; Insights</a>
   </div>
   <a href="#contact" class="nav-cta">Contact</a>
 </nav>
@@ -1352,9 +1372,9 @@
 
     <div class="contact-pre reveal">
       <span class="micro">Contact</span>
-      <h2 class="display">If you have a <em>company</em>,<br>we'd like to hear about it.</h2>
-      <p>Ancrage looks at deals with $25M to $100M of enterprise value across AI-adjacent, physical, and regulated sectors. We are most useful when an owner is thinking about the next ten years, not the next quarter. Bring us the company. We bring the operating model.</p>
-      <a href="mailto:harbor@ancrage.capital" class="contact-cta">harbor@ancrage.capital <span class="arrow">&rarr;</span></a>
+      <h2 class="display">From <em>you</em>.</h2>
+      <p>Ancrage looks at deals with up to $100M of enterprise value across AI-adjacent, physical, and regulated sectors. We are most useful when an owner is thinking about the long term.</p>
+      <a href="mailto:harbor@ancrage.io" class="contact-cta">harbor@ancrage.io <span class="arrow">&rarr;</span></a>
     </div>
 
     <div class="footer-grid">
@@ -1366,15 +1386,14 @@
           <circle cx="16" cy="9" r="1.4" fill="currentColor"/>
         </svg>
         <div class="brand-name">ANCRAGE</div>
-        <p>An AI-native private equity firm taking control positions in mid-market companies at the intersection of artificial intelligence, physical industry, and regulated markets.</p>
+        <p>A forward-deployed private investment firm at the intersection of artificial intelligence, physical industry, and regulated markets.</p>
       </div>
 
       <div class="footer-col">
         <h4>Offices</h4>
         <ul>
-          <li><span class="city-name">Toronto</span></li>
-          <li><span class="city-name">Detroit</span></li>
-          <li><span class="city-name">Hong Kong</span></li>
+          <li><span class="city-name">Toronto</span> <span class="city-tag">HQ</span></li>
+          <li><span class="city-name">Detroit</span> <span class="city-tag">US</span></li>
         </ul>
       </div>
 
@@ -1386,27 +1405,32 @@
           <li><a href="#fleet">Portfolio</a></li>
           <li><a href="#crew">Partners</a></li>
           <li><a href="#engine">Workforce</a></li>
+          <li><a href="/news-and-insights">News &amp; Insights</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:harbor@ancrage.capital">harbor@ancrage.capital</a></li>
-          <li><a href="mailto:deals@ancrage.capital">deals@ancrage.capital</a></li>
-          <li><a href="mailto:lp@ancrage.capital">lp@ancrage.capital</a></li>
-          <li><a href="mailto:press@ancrage.capital">press@ancrage.capital</a></li>
+          <li><a href="mailto:harbor@ancrage.io">harbor@ancrage.io</a></li>
         </ul>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      <span>&copy; 2026 Ancrage Capital. All rights reserved.</span>
+      <span>&copy; 2026 Ancrage. All rights reserved.</span>
       <div class="legal-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Disclosures</a>
+        <a href="#" class="footer-social" aria-label="LinkedIn (link pending)" title="LinkedIn (link pending)" data-disabled="true">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect width="4" height="12" x="2" y="9"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+        <a href="/terms">Terms &amp; Conditions</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/cookies">Cookies Settings</a>
       </div>
     </div>
   </div>
