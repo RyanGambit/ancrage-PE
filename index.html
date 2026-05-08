@@ -431,58 +431,6 @@
     line-height: 1.6;
   }
 
-  /* ============== TAGLINE ============== */
-  #tagline {
-    padding: 160px 0;
-    background: var(--ink);
-    color: var(--paper);
-    position: relative;
-    overflow: hidden;
-  }
-
-  #tagline::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(transparent 0%, transparent 95%, rgba(244, 236, 221, 0.04) 95%),
-      linear-gradient(90deg, transparent 0%, transparent 95%, rgba(244, 236, 221, 0.04) 95%);
-    background-size: 60px 60px;
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  .tagline-quote {
-    font-size: clamp(48px, 7vw, 96px);
-    line-height: 1.05;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 56px;
-    letter-spacing: -0.025em;
-  }
-
-  .tagline-quote em {
-    font-style: italic;
-    color: var(--copper);
-  }
-
-  .tagline-rule {
-    width: 80px;
-    height: 1px;
-    background: var(--copper);
-    margin: 0 auto 56px;
-  }
-
-  .tagline-body {
-    max-width: 680px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 19px;
-    line-height: 1.7;
-    color: var(--tide-pale);
-    font-weight: 300;
-  }
-
   /* ============== MANDATE ============== */
   #mandate {
     padding: 140px 0;
@@ -985,183 +933,6 @@
     opacity: 0.4;
   }
 
-  /* ============== COUNSEL ============== */
-  #counsel {
-    padding: 140px 0;
-    background: var(--paper);
-  }
-
-  .counsel-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .counsel-left h2 {
-    font-size: clamp(40px, 6vw, 72px);
-    line-height: 1.05;
-    margin-bottom: 32px;
-    font-weight: 300;
-  }
-
-  .counsel-left h2 em { font-style: italic; color: var(--tide); }
-
-  .counsel-left p {
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--slate);
-  }
-
-  .counsel-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .counsel-item {
-    display: grid;
-    grid-template-columns: 60px 1fr auto;
-    gap: 24px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--line);
-    align-items: center;
-  }
-
-  .counsel-item:first-child { border-top: 1px solid var(--line-strong); }
-  .counsel-item:last-child { border-bottom: 1px solid var(--line-strong); }
-
-  .counsel-item .index {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: var(--copper);
-  }
-
-  .counsel-item .person {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .counsel-item .person .name {
-    font-family: var(--display);
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-
-  .counsel-item .person .focus {
-    font-family: var(--body);
-    font-style: italic;
-    font-size: 14px;
-    color: var(--slate);
-  }
-
-  .counsel-item.placeholder .name {
-    color: var(--slate-light);
-    font-style: italic;
-  }
-
-  .counsel-item .glyph {
-    width: 32px; height: 32px;
-    opacity: 0.5;
-  }
-
-  /* ============== HARBORS (OFFICES) ============== */
-  #harbors {
-    padding: 140px 0;
-    background: var(--paper-deep);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .harbors-header {
-    margin-bottom: 80px;
-    max-width: 880px;
-  }
-
-  .harbors-header h2 {
-    font-size: clamp(40px, 6vw, 76px);
-    line-height: 1.05;
-    margin-bottom: 24px;
-    font-weight: 300;
-  }
-
-  .harbors-header h2 em { font-style: italic; color: var(--tide); }
-
-  .harbors-header p {
-    font-size: 18px;
-    color: var(--slate);
-    line-height: 1.65;
-    max-width: 620px;
-  }
-
-  .harbors-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--line-strong);
-    border-bottom: 1px solid var(--line-strong);
-  }
-
-  .harbor {
-    padding: 48px 32px 48px 0;
-    border-right: 1px solid var(--line);
-    position: relative;
-  }
-
-  .harbor:not(:first-child) { padding-left: 32px; }
-  .harbor:last-child { border-right: none; padding-right: 0; }
-
-  .harbor .harbor-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    color: var(--copper);
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .harbor h3 {
-    font-size: 48px;
-    line-height: 1;
-    margin-bottom: 8px;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-  }
-
-  .harbor .country {
-    font-style: italic;
-    color: var(--slate);
-    font-size: 16px;
-    margin-bottom: 24px;
-    font-family: var(--display);
-  }
-
-  .harbor .coords {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ink);
-    margin-bottom: 20px;
-    line-height: 1.7;
-  }
-
-  .harbor .coords-label {
-    color: var(--slate);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    display: block;
-  }
-
-  .harbor p {
-    font-size: 14.5px;
-    color: var(--slate);
-    line-height: 1.6;
-  }
-
   /* ============== CONTACT / FOOTER ============== */
   #contact {
     background: var(--ink-deep);
@@ -1332,13 +1103,10 @@
     .thesis-card:last-child { border-bottom: none; }
     .fleet-grid, .engine-grid { grid-template-columns: 1fr 1fr; }
     .crew-grid { grid-template-columns: repeat(3, 1fr); }
-    .mandate-grid, .counsel-grid, .fleet-header { grid-template-columns: 1fr; gap: 40px; }
+    .mandate-grid, .fleet-header { grid-template-columns: 1fr; gap: 40px; }
     .fleet-header .intro { justify-self: start; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .compass-rose { width: 240px; height: 240px; right: 4%; opacity: 0.18; }
-    .harbors-grid { grid-template-columns: 1fr; }
-    .harbor { border-right: none; border-bottom: 1px solid var(--line); padding: 36px 0 !important; }
-    .harbor:last-child { border-bottom: none; }
   }
 
   @media (max-width: 720px) {
@@ -1377,7 +1145,6 @@
     <a href="#fleet">Portfolio</a>
     <a href="#crew">Partners</a>
     <a href="#engine">Workforce</a>
-    <a href="#harbors">Offices</a>
   </div>
   <a href="#contact" class="nav-cta">Contact</a>
 </nav>
@@ -1746,66 +1513,6 @@
   </div>
 </section>
 
-<!-- ============== COUNSEL ============== -->
-<section id="counsel">
-  <div class="container">
-    <div class="section-label reveal">
-      <span class="roman">VI</span>
-      <span>Advisors</span>
-    </div>
-
-    <div class="counsel-grid">
-      <div class="counsel-left reveal delay-1">
-        <h2>Advisors who've been there.</h2>
-        <p>The advisory bench is small and senior. Operators who have built, sold, regulated, and rebuilt the kinds of companies we are buying. They sit at the table on every committee call, every diligence escalation, and every value-creation review.</p>
-      </div>
-
-      <div class="counsel-list reveal delay-2">
-        <div class="counsel-item">
-          <span class="index">001</span>
-          <div class="person">
-            <span class="name">Teddy Wieser</span>
-            <span class="focus">Capital markets &amp; M&amp;A advisory</span>
-          </div>
-          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#1E4D4A" stroke-width="0.8"/><circle cx="16" cy="16" r="2" fill="#1E4D4A"/></svg>
-        </div>
-        <div class="counsel-item placeholder">
-          <span class="index">002</span>
-          <div class="person">
-            <span class="name">To Be Announced</span>
-            <span class="focus">Healthcare &amp; regulated industries</span>
-          </div>
-          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
-        </div>
-        <div class="counsel-item placeholder">
-          <span class="index">003</span>
-          <div class="person">
-            <span class="name">To Be Announced</span>
-            <span class="focus">Logistics &amp; supply chain</span>
-          </div>
-          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
-        </div>
-        <div class="counsel-item placeholder">
-          <span class="index">004</span>
-          <div class="person">
-            <span class="name">To Be Announced</span>
-            <span class="focus">Asia-Pacific operating partner</span>
-          </div>
-          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
-        </div>
-        <div class="counsel-item placeholder">
-          <span class="index">005</span>
-          <div class="person">
-            <span class="name">To Be Announced</span>
-            <span class="focus">Gulf &amp; Middle East advisory</span>
-          </div>
-          <svg class="glyph" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#8B9099" stroke-width="0.6" stroke-dasharray="2 3"/></svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============== CONTACT / FOOTER ============== -->
 <section id="contact">
   <div class="container">
@@ -1846,7 +1553,6 @@
           <li><a href="#fleet">Portfolio</a></li>
           <li><a href="#crew">Partners</a></li>
           <li><a href="#engine">Workforce</a></li>
-          <li><a href="#harbors">Offices</a></li>
         </ul>
       </div>
 
