@@ -506,25 +506,126 @@
     position: relative;
   }
 
-  .fleet-statement {
+  .fleet-header {
+    margin-bottom: 80px;
     max-width: 880px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 40px 0;
   }
 
-  .fleet-statement p {
-    font-family: var(--display);
-    font-size: clamp(28px, 3.6vw, 44px);
-    line-height: 1.25;
+  .fleet-header h2 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.05;
+    margin-bottom: 24px;
     font-weight: 300;
-    color: var(--ink);
-    letter-spacing: -0.015em;
   }
 
-  .fleet-statement em {
+  .fleet-header h2 em { font-style: italic; color: var(--tide); }
+
+  .fleet-header p {
+    font-size: 17px;
+    color: var(--slate);
+    line-height: 1.65;
+    max-width: 620px;
+  }
+
+  .fleet-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .vessel {
+    background: var(--paper);
+    padding: 40px 36px;
+    position: relative;
+    border-top: 1px solid var(--ink);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vessel:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(10, 22, 40, 0.08);
+  }
+
+  .vessel-marker {
+    position: absolute;
+    top: -8px;
+    left: 36px;
+    width: 14px; height: 14px;
+    background: var(--copper);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--paper-deep);
+  }
+
+  .vessel-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .vessel-meta .position { color: var(--tide); }
+
+  .vessel h3 {
+    font-size: 38px;
+    line-height: 1.05;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .vessel h3 .vessel-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .vessel h3 .vessel-link::after {
+    content: '↗';
+    display: inline-block;
+    margin-left: 0.35em;
+    font-size: 0.55em;
+    color: var(--copper);
+    vertical-align: 0.4em;
+    transition: transform 0.2s ease;
+  }
+
+  .vessel h3 .vessel-link:hover { color: var(--tide); }
+  .vessel h3 .vessel-link:hover::after { transform: translate(2px, -2px); }
+
+  .vessel .vessel-tag {
     font-style: italic;
-    color: var(--tide);
+    color: var(--copper-deep);
+    font-size: 16px;
+    margin-bottom: 24px;
+    font-family: var(--display);
+  }
+
+  .vessel p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--slate);
+    margin-bottom: 16px;
+  }
+
+  .vessel-coords {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--slate);
+    letter-spacing: 0.1em;
   }
 
   /* ============== CREW ============== */
