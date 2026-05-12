@@ -833,6 +833,11 @@
     background: rgba(244, 236, 221, 0.12);
     border: 1px solid rgba(244, 236, 221, 0.12);
     position: relative;
+  }
+
+  /* center a lone last card in row 3 (e.g. 7th card in a 3-col grid) */
+  .engine-grid .agent:last-child:nth-child(3n+1) {
+    grid-column: 2;
     z-index: 2;
   }
 
